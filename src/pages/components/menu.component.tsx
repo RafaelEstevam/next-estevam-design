@@ -1,12 +1,19 @@
 import styled from 'styled-components';
 
-interface MenuItems{
+export interface NetworkItems{
+    id: string,
+    name: string,
+    link: string,
     label: string,
-    link: string
 }
 
+export interface MenuItems extends NetworkItems{
+    slug: string
+}
+  
 export type MenuProps = {
-    items: MenuItems[];
+    menus?: MenuItems[];
+    networks?: NetworkItems[];
 }
 
 const ItemMenu = styled('li')`
@@ -22,13 +29,16 @@ const Menu = styled('ul')`
     gap: 16px
 `
 
-const MeunComponent = ({items}:MenuProps) => {
-    return (
+const MeunComponent = ({menus}:MenuProps) => {
+
+    return  (
         <>
             <div>
                 <Menu>
-                    {items?.map((item, key) => (
-                        <ItemMenu key={key}><ItemLink href={item.link}>{item.label}</ItemLink></ItemMenu>
+                    {menus?.map((item, key) => (
+                        <ItemMenu key={key}>
+                            <ItemLink href={item.link}>{item.label}</ItemLink>
+                        </ItemMenu>
                     ))}
                 </Menu>
             </div>
