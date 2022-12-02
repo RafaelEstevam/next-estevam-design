@@ -1,4 +1,3 @@
-import axios from "axios";
 import { GetStaticProps } from "next";
 import { useEffect, useState } from "react";
 

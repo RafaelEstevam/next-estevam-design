@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import MeunComponent from './components/menu.component';
 import Wrapper from './components/wrapper.component';
+import { GetStaticProps } from "next";
+import { GetApi } from '../services/api';
 
 interface MenuItems{
   label: string,
   link: string
+}
+
+type MenuItemsProps = {
+  menus: MenuItems[];
 }
 
 const MenuWrapper = styled('nav')`
@@ -14,9 +20,9 @@ const MenuWrapper = styled('nav')`
   padding: 32px;
 `
 
-export default function Home() {
+export default function Home(props:MenuItemsProps) {
 
-  const items:MenuItems[] = [{label: 'Home', link: "/"}, {label: 'About', link: "#about"}]
+  const {menus:items} = props;
 
   return (
     <main>
@@ -29,4 +35,23 @@ export default function Home() {
       </Wrapper>
     </main>
   )
+}
+
+export const getStaticProps:GetStaticProps = async(context) => {
+
+  const {menus} = await GetApi(
+    `query {
+      menus {
+          id
+          label
+          link
+          slug
+      }
+  }`, 'POST');
+
+  return {
+    props: {
+      menus: menus
+    }
+  }
 }
