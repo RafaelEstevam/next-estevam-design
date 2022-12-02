@@ -6,6 +6,7 @@ import ContentComponent, {ContentItems} from './components/content.component';
 import Wrapper from './components/wrapper.component';
 import { GetStaticProps } from "next";
 import { GetApi } from '../services/api';
+import Image from 'next/image';
 
 interface GraduationExperiencesItems{
   id: string,
@@ -18,11 +19,16 @@ interface GraduationExperiencesItems{
   typeExperience: string
 }
 
+interface LogoItem{
+  url: string
+}
+
 interface TechItems{
   id: string,
   name: string,
   description: string,
-  skill: string
+  skill: string,
+  logo: LogoItem
 }
 
 interface BadgetItems{
@@ -70,6 +76,15 @@ export default function Home(props:ContentProps) {
           </div>
           </div>
         </Wrapper>
+        <Wrapper>
+          <div>
+            <div>
+              {teches?.map((item, key) => (
+                <Image alt={item.name} width={100} height={100} key={key} src={item.logo.url} />
+              ))}
+            </div>
+          </div>
+        </Wrapper>
     </main>
   )
 }
@@ -112,7 +127,7 @@ export const getStaticProps:GetStaticProps = async(context) => {
         description
         skill
         logo{
-          locale
+          url
         }
       }
       networks{
