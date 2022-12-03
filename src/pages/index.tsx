@@ -3,39 +3,16 @@ import MeunComponent, {MenuItems, NetworkItems} from './components/menu.componen
 import NetworkComponent from './components/network.component';
 import SlideComponent from './components/slide.component';
 import ContentComponent, {ContentItems} from './components/content.component';
+import BadgetComponent, {BadgetItems} from './components/badget.component';
+import TechnologyComponent, {TechnologyItems} from './components/technology.component';
+import GraduationComponent from './components/graduation.component';
+import ExperienceComponent from './components/experience.component';
+import { GraduationExperiencesItems } from './components/interfaces/graduationExperience.component.interface';
 import Wrapper from './components/wrapper.component';
 import { GetStaticProps } from "next";
 import { GetApi } from '../services/api';
 import Image from 'next/image';
-
-interface GraduationExperiencesItems{
-  id: string,
-  name: string,
-  description: string,
-  company: string,
-  startDate: string,
-  current: string,
-  endDate: string,
-  typeExperience: string
-}
-
-interface LogoItem{
-  url: string
-}
-
-interface TechItems{
-  id: string,
-  name: string,
-  description: string,
-  skill: string,
-  logo: LogoItem
-}
-
-interface BadgetItems{
-  id: string,
-  title: string,
-  value: string,
-}
+import PhotoComponent, { PhotoItem } from './components/photo.component';
 
 const MenuWrapper = styled('nav')`
   display: flex;
@@ -45,7 +22,7 @@ const MenuWrapper = styled('nav')`
 
 export default function Home(props:ContentProps) {
 
-  const {menus, contents, slides, graduationExperiences, teches, networks, badgets} = props;
+  const {menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos} = props;
 
   return (
     <main>
@@ -56,32 +33,38 @@ export default function Home(props:ContentProps) {
               <NetworkComponent {...{networks}} />
           </MenuWrapper>
         </Wrapper>
+        
         <Wrapper>
           <SlideComponent {...{items: slides}} />
         </Wrapper>
+
         <Wrapper>
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <div>
-            <h3>
-              Sobre
-            </h3>
-          </div>
-          <div>
-            Foto
-          </div>
-          <div>
-            <h3>
-              Badgets
-            </h3>
-          </div>
+            <div>
+              <ContentComponent {...{contents}} />
+            </div>
+            <div>
+              <PhotoComponent {...{photos}} />
+            </div>
+            <div>
+              <BadgetComponent {...{badgets}} />
+            </div>
           </div>
         </Wrapper>
+        
         <Wrapper>
           <div>
+            <TechnologyComponent {...{technologies}} />
+          </div>
+        </Wrapper>
+
+        <Wrapper>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div>
-              {teches?.map((item, key) => (
-                <Image alt={item.name} width={100} height={100} key={key} src={item.logo.url} />
-              ))}
+              <GraduationComponent {...{graduations}} />
+            </div>
+            <div>
+              <ExperienceComponent {...{experiences}} />
             </div>
           </div>
         </Wrapper>
@@ -91,7 +74,7 @@ export default function Home(props:ContentProps) {
 
 export const getStaticProps:GetStaticProps = async(context) => {
 
-  const {menus, contents, slides, graduationExperiences, teches, networks, badgets} = await GetApi(
+  const {menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos} = await GetApi(
     `query {
       menus {
         id
@@ -111,7 +94,7 @@ export const getStaticProps:GetStaticProps = async(context) => {
         text
         typeOfContent
       }
-      graduationExperiences {
+      experiences:graduationExperiences(where:{typeExperience:experience}){
         id
         name
         description
@@ -121,7 +104,17 @@ export const getStaticProps:GetStaticProps = async(context) => {
         endDate
         typeExperience
       }
-      teches{
+      graduations:graduationExperiences(where:{typeExperience:graduation}){
+        id
+        name
+        description
+        company
+        startDate
+        current
+        endDate
+        typeExperience
+      }
+      technologies:teches{
         id
         name
         description
@@ -143,6 +136,11 @@ export const getStaticProps:GetStaticProps = async(context) => {
         title
         value
       }
+      photos:assets(where: {width_gt:500, mimeType:"image/jpeg"}){
+        id
+        url
+        mimeType
+      }
   }`, 'POST');
 
   return {
@@ -150,10 +148,12 @@ export const getStaticProps:GetStaticProps = async(context) => {
       menus: menus,
       contents: contents,
       slides: slides,
-      graduationExperiences: graduationExperiences,
-      teches: teches,
+      experiences: experiences,
+      graduations: graduations,
+      technologies: technologies,
       networks:networks,
-      badgets: badgets
+      badgets: badgets,
+      photos: photos
     }
   }
 }
@@ -162,8 +162,10 @@ type ContentProps = {
   menus: MenuItems[],
   contents: ContentItems[],
   slides: ContentItems[],
-  graduationExperiences: GraduationExperiencesItems[],
-  teches: TechItems[],
+  graduations: GraduationExperiencesItems[],
+  experiences: GraduationExperiencesItems[],
+  technologies: TechnologyItems[],
   networks: NetworkItems[],
-  badgets: BadgetItems[]
+  badgets: BadgetItems[],
+  photos: PhotoItem[]
 }

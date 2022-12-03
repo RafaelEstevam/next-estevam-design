@@ -13,9 +13,14 @@ export type ContentProps = {
 
 const ContentComponent = ({contents}:ContentProps) => {
     return (
-        <>
-            <div></div>
-        </>
+        <div>
+            {contents?.map((item, key) => (
+                <div key={key}>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                </div>
+            ))}
+        </div>
     ) 
 };
 
