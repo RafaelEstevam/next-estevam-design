@@ -16,7 +16,12 @@ export const GetApi = async (query: string, method: string) => {
         body: JSON.stringify(requestBody)
       };
       const response = await (await fetch(HYGRAPH_URL, options)).json();
-      return response.data
+      const isVoid = response && Object.keys(response).length === 0;
+      if(!isVoid){
+        return response.data
+      }else{
+        return false
+      }
     }
     catch (err) {
       console.log('ERROR DURING FETCH REQUEST', err);
