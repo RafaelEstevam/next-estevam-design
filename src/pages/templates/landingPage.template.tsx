@@ -12,6 +12,7 @@ import Wrapper from '../components/wrapper.component';
 import { GetStaticProps } from "next";
 import { GetApi } from '../../services/api';
 import PhotoComponent, { PhotoItem } from '../components/photo.component';
+import FormComponent from '../components/form.component';
 
 const MenuWrapper = styled('nav')`
   display: flex;
@@ -66,6 +67,10 @@ const LandingPageTemplate = (props:ContentProps) => {
               <ExperienceComponent {...{experiences}} />
             </div>
           </div>
+        </Wrapper>
+
+        <Wrapper>
+          <FormComponent />
         </Wrapper>
     </main>
     )
