@@ -7,7 +7,7 @@ import BadgetComponent, {BadgetItems} from '../components/badget.component';
 import TechnologyComponent, {TechnologyItems} from '../components/technology.component';
 import GraduationComponent from '../components/graduation.component';
 import ExperienceComponent from '../components/experience.component';
-import { GraduationExperiencesItems } from '../components/interfaces/graduationExperience.component.interface';
+import { GraduationExperiencesItems } from '../../interfaces/graduationExperience.interface';
 import Wrapper from '../components/wrapper.component';
 import { GetStaticProps } from "next";
 import { GetApi } from '../../services/api';
