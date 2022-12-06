@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GraduationExperiencesItems } from './interfaces/graduationExperience.component.interface';
+import { GraduationExperiencesItems } from '../../interfaces/graduationExperience.interface';
 
 export type ExperienceProps = {
     experiences?: GraduationExperiencesItems[];

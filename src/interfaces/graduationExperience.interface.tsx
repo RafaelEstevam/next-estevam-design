@@ -8,9 +8,3 @@ export interface GraduationExperiencesItems{
     endDate: string,
     typeExperience: string
 }
-
-const GraduationExperienceComponent = () => {
-    return null
-}
-
-export default GraduationExperienceComponent
