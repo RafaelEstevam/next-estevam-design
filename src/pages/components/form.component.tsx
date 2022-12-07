@@ -1,14 +1,11 @@
 import {useEffect, useState} from 'react';
+import {PostApi} from '../../services/api';
 
 interface FormInterface {
     name: string,
     email: string,
     subject: string,
     message: string,
-}
-
-interface ElementInterface{
-
 }
 
 const FormComponent = () => {
@@ -24,9 +21,21 @@ const FormComponent = () => {
         setForm({...form, ...{[e.currentTarget.name]: e.currentTarget.value}})
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(form);
+        const mutation = `
+            mutation {
+                createContactForm(data: {name:"${form.name}", email:"${form.email}", subject: "${form.subject}", message:"${form.message}"}) {
+                    id
+                    name
+                    email
+                    subject
+                    message
+                }
+            }`
+
+        const response = await PostApi(mutation, 'POST');
+        console.log(response);
     }
 
     return (

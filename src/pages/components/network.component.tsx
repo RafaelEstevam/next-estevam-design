@@ -17,15 +17,13 @@ const Menu = styled('ul')`
 const MeunComponent = ({networks}:MenuProps) => {
     return (
         <>
-            <div>
-                <Menu>
-                    {networks?.map((item, key) => (
-                        <ItemMenu key={key}>
-                            <ItemLink href={item.link}>{item.name}</ItemLink>
-                        </ItemMenu>
-                    ))}
-                </Menu>
-            </div>
+            <Menu>
+                {networks?.map((item, key) => (
+                    <ItemMenu key={key}>
+                        <ItemLink href={item.link}>{item.name}</ItemLink>
+                    </ItemMenu>
+                ))}
+            </Menu>
         </>
     ) 
 };

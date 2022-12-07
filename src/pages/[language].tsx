@@ -47,11 +47,11 @@ export const getStaticProps:GetStaticProps = async({params = {}}) => {
           text
           typeOfContent
         }
-        slides:contents(where:{typeOfContent:slide}, locales:${params.language}){
+        slides(locales:${params.language}){
           id
           title
-          text
-          typeOfContent
+          subtitle
+          description
         }
         experiences:graduationExperiences(where:{typeExperience:experience}, locales:${params.language}){
           id

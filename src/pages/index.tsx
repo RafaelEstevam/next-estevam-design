@@ -25,11 +25,11 @@ export const getStaticProps:GetStaticProps = async(context) => {
         text
         typeOfContent
       }
-      slides:contents(where:{typeOfContent:slide}){
+      slides{
         id
         title
-        text
-        typeOfContent
+        subtitle
+        description
       }
       experiences:graduationExperiences(where:{typeExperience:experience}){
         id
