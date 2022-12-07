@@ -1,51 +1,62 @@
-import {useEffect, useState} from 'react';
-import {PostApi} from '../../services/api';
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import { PostApi } from '../../services/api';
+import InputItem, { TextAreaForm } from './input.form.component';
+import ButtonComponent from './Button.component';
 
 interface FormInterface {
     name: string,
     email: string,
     subject: string,
     message: string,
-}
+};
+
+const FormWrapper = styled('form')`
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 64px;
+`;
 
 const FormComponent = () => {
 
     const [form, setForm] = useState<FormInterface>({
-        name:'',
-        email:'',
+        name: '',
+        email: '',
         message: '',
         subject: ''
     });
 
-    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-        setForm({...form, ...{[e.currentTarget.name]: e.currentTarget.value}})
+    const handleChange = (e: any) => {
+        setForm({ ...form, ...{ [e.currentTarget.name]: e.currentTarget.value } })
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const mutation = `
-            mutation {
-                createContactForm(data: {name:"${form.name}", email:"${form.email}", subject: "${form.subject}", message:"${form.message}"}) {
-                    id
-                    name
-                    email
-                    subject
-                    message
-                }
-            }`
+        console.log(form);
 
-        const response = await PostApi(mutation, 'POST');
-        console.log(response);
+        // const mutation = `
+        //     mutation {
+        //         createContactForm(data: {name:"${form.name}", email:"${form.email}", subject: "${form.subject}", message:"${form.message}"}) {
+        //             id
+        //             name
+        //             email
+        //             subject
+        //             message
+        //         }
+        //     }`
+
+        // const response = await PostApi(mutation, 'POST');
     }
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)}>
-            <input name="name" value={form.name || ''} onChange={(e) => handleChange(e)} />
-            <input name="email" value={form.email || ''} onChange={(e) => handleChange(e)}/>
-            <input name="subject" value={form.subject || ''} onChange={(e) => handleChange(e)}/>
-            <input name="message" value={form.message || ''} onChange={(e) => handleChange(e)}/>
-            <button type='submit'>Enviar</button>
-        </form>
+        <FormWrapper onSubmit={(e) => handleSubmit(e)}>
+            <InputItem placeholder='name' required name="name" value={form.name || ''} onChange={(e) => handleChange(e)} />
+            <InputItem placeholder='email' required name="email" value={form.email || ''} onChange={(e) => handleChange(e)} />
+            <InputItem placeholder='subjet' required name="subject" value={form.subject || ''} onChange={(e) => handleChange(e)} />
+            <TextAreaForm placeholder='message' required rows={5} name="message" value={form.message || ''} onChange={(e) => handleChange(e)}></TextAreaForm>
+            <ButtonComponent type='submit' label='Submit contact' />
+        </FormWrapper>
     )
 }
 

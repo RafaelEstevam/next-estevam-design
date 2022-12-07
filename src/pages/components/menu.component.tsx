@@ -1,17 +1,18 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+import { style } from '../../styles/settings';
 
-export interface NetworkItems{
+export interface NetworkItems {
     id: string,
     name: string,
     link: string,
     label: string,
 }
 
-export interface MenuItems extends NetworkItems{
+export interface MenuItems extends NetworkItems {
     slug: string
 }
-  
+
 export type MenuProps = {
     menus?: MenuItems[];
     networks?: NetworkItems[];
@@ -30,33 +31,41 @@ const ItemMenu = styled('li')`
     }
     :hover{
         .itemLinkEffect{
-            // opacity: 1;
-            // width: 100%;
+            opacity: 1;
+            width: 100%;
         }
     }
 `
 
 const ItemLink = styled('a')`
     color: #fff;
+    cursor: default;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 14px;
-    padding: 16px 8px;
+    font-size: ${style.fontSize}rem;
+    padding: ${style.constAttr * 4}px ${style.constAttr * 2}px;
     display: block;
     min-width: max-content;
+    &.active{
+        :hover{
+            cursor: pointer;
+        }
+    }
+    
 `
 
 const ItemLinkEffect = styled('div')`
     width: 100%;
-    height: 3px;
-    background: #fff;
+    height: ${style.constAttr}px;
+    background: ${style.grayBackground};
+    border-radius: ${style.constAttr * 10}px;
 `
 
 const Menu = styled('ul')`
     display: flex;
-    gap: 16px;
+    gap: ${style.constAttr * 4}px;
     opacity: 0;
-    transition: 0.5 linear all;
+    transition: 0.1s linear all;
     &.active{
         opacity: 1;
     }
@@ -65,13 +74,14 @@ const Menu = styled('ul')`
 const HamburgerMenu = styled('div')`
     cursor:pointer;
     position: relative;
-    height: 40px;
-    width: 48px;
+    height: ${style.constAttr * 10}px;
+    width: ${style.constAttr * 12}px;
     .ham{
         width: 100%;
-        height: 4px;
+        height: ${style.constAttr}px;
+        border-radius: ${style.constAttr * 10}px;
         display: block;
-        background: #fff;
+        background: ${style.white};
         position: absolute;
         transition: 0.1s linear all;
         transform: rotate(0deg);
@@ -108,46 +118,32 @@ const HamburgerMenu = styled('div')`
 const HamburgerMenuWrapper = styled('div')`
     display: flex;
     align-items: center;
-    gap: 48px;
-    
+    gap: ${style.constAttr * 10}px;
 `
 
-const MeunComponent = ({menus}:MenuProps) => {
+const MeunComponent = ({ menus }: MenuProps) => {
 
     const [show, setShow] = useState<Boolean>(false);
 
     return (
         <HamburgerMenuWrapper>
             <HamburgerMenu className={show && 'active'} onClick={() => show ? setShow(false) : setShow(true)}>
-                <div className="ham ham1"></div>    
-                <div className="ham ham2"></div>    
-                <div className="ham ham2 ham2-2"></div>    
+                <div className="ham ham1"></div>
+                <div className="ham ham2"></div>
+                <div className="ham ham2 ham2-2"></div>
                 <div className="ham ham3"></div>
             </HamburgerMenu>
             <Menu className={show && 'active'}>
                 {menus?.map((item, key) => (
                     <ItemMenu key={key}>
-                        <ItemLink href={item.link}>{item.label}</ItemLink>
+                        <ItemLink className={show && 'active'} href={item.link}>{item.label}</ItemLink>
                         <ItemLinkEffect className="itemLinkEffect" />
                     </ItemMenu>
                 ))}
-            </Menu> 
-            
+            </Menu>
+
         </HamburgerMenuWrapper>
     )
-
-    // return  (
-    //     <>
-    //         <Menu>
-    //             {menus?.map((item, key) => (
-    //                 <ItemMenu key={key}>
-    //                     <ItemLink href={item.link}>{item.label}</ItemLink>
-    //                     <ItemLinkEffect className="itemLinkEffect" />
-    //                 </ItemMenu>
-    //             ))}
-    //         </Menu>
-    //     </>
-    // )
 };
 
 export default MeunComponent;

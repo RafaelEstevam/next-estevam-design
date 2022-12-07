@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Wrapper from './wrapper.component';
-import MeunComponent, {MenuItems, NetworkItems} from './menu.component';
+import MeunComponent, { MenuItems, NetworkItems } from './menu.component';
 import NetworkComponent from './network.component';
 
 export type HeaderProps = {
@@ -18,29 +18,41 @@ const MenuWrapper = styled('nav')`
 
 const CustomHeader = styled('div')``
 
-const HeaderComponent = styled('div')<{ justifyContent?: string }>`
+const HeaderComponent = styled('div') <{ justifyContent?: string }>`
     width: 33.33%;
     display: flex;
     justify-content: ${(props) => props.justifyContent};
     align-items: center;
 `
 
-const HeaderWrapper = ({menus, networks}:HeaderProps) => {
+export const Logo = styled('div')`
+    display: flex;
+    padding: 16px;
+    border: 4px solid #333;
+    border-radius: 10px;
+    background: #121212;
+    align-items: center;
+    justify-content: center;
+    h2{
+        font-size: 1.5rem
+    }
+`;
+
+const HeaderWrapper = ({ menus, networks }: HeaderProps) => {
     return (
         <CustomHeader>
-            <Wrapper>
+            <Wrapper id='#'>
                 <MenuWrapper>
                     <HeaderComponent>
-                        <MeunComponent {...{menus}} />
+                        <MeunComponent {...{ menus }} />
                     </HeaderComponent>
                     <HeaderComponent justifyContent={'center'}>
-                        <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', padding: '16px', border: '4px solid #333', borderRadius: '10px 10px'}}>
-                            <h2 style={{fontSize: '1.5rem'}}>&#60;REO/&#62;</h2>
-                            {/* <small>Rafael Estevam de Oliveira</small> */}
-                        </div>
+                        <Logo>
+                            <h2>&#60;REO/&#62;</h2>
+                        </Logo>
                     </HeaderComponent>
                     <HeaderComponent justifyContent={'right'}>
-                        <NetworkComponent {...{networks}} />
+                        <NetworkComponent {...{ networks }} />
                     </HeaderComponent>
                 </MenuWrapper>
             </Wrapper>

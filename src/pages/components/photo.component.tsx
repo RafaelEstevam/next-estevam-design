@@ -1,6 +1,6 @@
 import Image from 'next/image';
-
-export interface PhotoItem{
+import styled from 'styled-components';
+export interface PhotoItem {
     id: string
     url: string
 }
@@ -9,13 +9,35 @@ type PhotoType = {
     photos: PhotoItem[]
 }
 
-const PhotoComponent = ({photos}:PhotoType) => {
+const PhotoWrapper = styled('div')`
+    width: 33.33%;
+    position: relative;
+`
+
+const Photo = styled(Image)`
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    filter: grayscale(1);
+`;
+
+const PhotoItem = styled('div')`
+    padding: 48px;
+    border: 4px solid #333;
+    width: 100%;
+    border-radius: 10px;
+    background: #121212;
+`
+
+const PhotoComponent = ({ photos }: PhotoType) => {
     return (
-        <div>
+        <PhotoWrapper>
             {photos?.map((item, key) => (
-                <Image alt={item.id} width={100} height={100} key={key} src={item.url} />
+                <PhotoItem key={key} >
+                    <Photo alt={item.id} width={400} height={800} src={item.url} />
+                </PhotoItem>
             ))}
-        </div>
+        </PhotoWrapper>
     )
 }
 

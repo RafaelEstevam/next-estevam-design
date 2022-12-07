@@ -11,7 +11,6 @@ export type SlideProps = {
 }
 
 const SlideWrapper = styled('div')`
-    padding: 128px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,6 +22,10 @@ const SlideContent = styled('div')`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 32px;
+    border: 4px solid #333;
+    border-radius: 10px;
+    background: #121212;
 `
 
 const Title = styled('h1')`
@@ -38,7 +41,7 @@ const Description = styled('h2')`
     font-weight: normal;
 `
 
-const SlideComponent = ({items}:SlideProps) => {
+const SlideComponent = ({ items }: SlideProps) => {
 
     return (
         <>
