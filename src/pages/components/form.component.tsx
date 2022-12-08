@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { PostApi } from '../../services/api';
 import InputItem, { TextAreaForm } from './input.form.component';
 import ButtonComponent from './Button.component';
+import { useSnackbar } from 'notistack';
 
 interface FormInterface {
     name: string,
@@ -20,6 +21,8 @@ const FormWrapper = styled('form')`
 
 const FormComponent = () => {
 
+    const {enqueueSnackbar} = useSnackbar();
+    
     const [form, setForm] = useState<FormInterface>({
         name: '',
         email: '',
@@ -31,22 +34,30 @@ const FormComponent = () => {
         setForm({ ...form, ...{ [e.currentTarget.name]: e.currentTarget.value } })
     }
 
+    const handleError = () => {
+        enqueueSnackbar("Houve um erro na hora de enviar. Tente novamente mais tarde", {variant: "error"});
+    }
+
+    const handleSuccess= () => {
+        enqueueSnackbar("Contato enviado com sucesso.", {variant: 'success'});
+    }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(form);
 
-        // const mutation = `
-        //     mutation {
-        //         createContactForm(data: {name:"${form.name}", email:"${form.email}", subject: "${form.subject}", message:"${form.message}"}) {
-        //             id
-        //             name
-        //             email
-        //             subject
-        //             message
-        //         }
-        //     }`
+        const mutation = `
+            mutation {
+                createContactForm(data: {name:"${form.name}", email:"${form.email}", subject: "${form.subject}", message:"${form.message}"}) {
+                    id
+                    name
+                    email
+                    subject
+                    message
+                }
+            }`
 
-        // const response = await PostApi(mutation, 'POST');
+        const response = await PostApi(mutation, 'POST', handleError, handleSuccess);
+
     }
 
     return (

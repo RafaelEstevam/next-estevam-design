@@ -17,7 +17,7 @@ const PhotoWrapper = styled('div')`
 const Photo = styled(Image)`
     width: 100%;
     height: auto;
-    border-radius: 200px;
+    border-radius: 2000px;
     filter: grayscale(1);
 `;
 
@@ -25,7 +25,7 @@ const PhotoItem = styled('div')`
     padding: 48px;
     border: 4px solid #333;
     width: 100%;
-    border-radius: 200px;
+    border-radius: 2000px;
     background: #121212;
 `
 

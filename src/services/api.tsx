@@ -1,4 +1,5 @@
 import { GraphQLClient } from "graphql-request";
+import { useSnackbar } from "notistack";
 
 const HYGRAPH_PERMANENTAUTH_TOKEN = process.env.NEXT_PUBLIC_HYGRAPH_PERMANENTAUTH_TOKEN || '';
 const HYGRAPH_URL = process.env.NEXT_PUBLIC_HYGRAPH_URL || '';
@@ -31,7 +32,7 @@ export const GetApi = async (query: string, method: string) => {
     }
 };
 
-export const PostApi = async (mutation: string, method: string) => {
+export const PostApi = async (mutation: string, method: string, callbackError: any, callbackSucess: any) => {
   const hygraph = new GraphQLClient(HYGRAPH_URL_CRUD, {
     headers: {
       authorization: `Bearer ${process.env.NEXT_PUBLIC_HYGRAPH_CRUD_TOKEN}`,
@@ -39,19 +40,11 @@ export const PostApi = async (mutation: string, method: string) => {
   });
 
   try {
-    // const { createSubmission } = await hygraph.request(`
-    //   mutation {
-    //     createContactForm(data: {name:"teste", email:"teste@teste.com", subject: "teste", message:"teste"}) {
-    //       id
-    //       name
-    //       email
-    //       subject
-    //       message
-    //     }
-    //   }`
-    // );
     const {createSubmission} = await hygraph.request(mutation);
-  } catch ({ message }) {
-    console.log(message);
+    callbackSucess();
+    return createSubmission;
+
+  } catch {
+    callbackError()
   }
 };

@@ -11,6 +11,12 @@ const ButtonWrapper = styled('button')`
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.1s linear all;
+  :hover{
+    opacity: 1;
+  }
 `
 
 const ButtonComponent = (props: any) => {
