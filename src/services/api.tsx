@@ -32,7 +32,8 @@ export const GetApi = async (query: string, method: string) => {
     }
 };
 
-export const PostApi = async (mutation: string, method: string, callbackError: any, callbackSucess: any) => {
+export const PostApi = async (mutation: string, method: string, callbackError: any, callbackSucess: any, callbackLoading: any) => {
+  callbackLoading(true);
   const hygraph = new GraphQLClient(HYGRAPH_URL_CRUD, {
     headers: {
       authorization: `Bearer ${process.env.NEXT_PUBLIC_HYGRAPH_CRUD_TOKEN}`,
@@ -46,5 +47,7 @@ export const PostApi = async (mutation: string, method: string, callbackError: a
 
   } catch {
     callbackError()
+  } finally{
+    callbackLoading(false);
   }
 };

@@ -30,8 +30,14 @@ const FormComponent = () => {
         subject: ''
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (e: any) => {
         setForm({ ...form, ...{ [e.currentTarget.name]: e.currentTarget.value } })
+    }
+
+    const handleLoading = (submited:boolean) => {
+        setLoading(submited)
     }
 
     const handleError = () => {
@@ -56,7 +62,7 @@ const FormComponent = () => {
                 }
             }`
 
-        const response = await PostApi(mutation, 'POST', handleError, handleSuccess);
+        const response = await PostApi(mutation, 'POST', handleError, handleSuccess, handleLoading);
 
     }
 
@@ -66,7 +72,11 @@ const FormComponent = () => {
             <InputItem placeholder='email' required name="email" value={form.email || ''} onChange={(e) => handleChange(e)} />
             <InputItem placeholder='subjet' required name="subject" value={form.subject || ''} onChange={(e) => handleChange(e)} />
             <TextAreaForm placeholder='message' required rows={5} name="message" value={form.message || ''} onChange={(e) => handleChange(e)}></TextAreaForm>
-            <ButtonComponent type='submit' label='Submit contact' />
+            {!loading ? (
+                <ButtonComponent type='submit' label='Submit contact' />
+            ) : (
+                <p>Loading...</p>
+            )}
         </FormWrapper>
     )
 }
