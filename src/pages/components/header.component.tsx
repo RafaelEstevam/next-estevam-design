@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Wrapper from './wrapper.component';
 import MeunComponent, { MenuItems, NetworkItems } from './menu.component';
 import NetworkComponent from './network.component';
+import { style } from '../../styles/settings';
 
 export type HeaderProps = {
     menus?: MenuItems[];
@@ -12,7 +13,7 @@ const MenuWrapper = styled('nav')`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 32px 0px;
+  padding: ${style.constAttr * 8}px 0px;
   align-items: center;
 `
 
@@ -25,16 +26,17 @@ const HeaderComponent = styled('div') <{ justifyContent?: string }>`
     align-items: center;
 `
 
-export const Logo = styled('div')`
+export const Logo = styled('div')<{fontSize?: string}>`
     display: flex;
-    padding: 16px;
-    border: 4px solid #333;
-    border-radius: 10px;
-    background: #121212;
+    padding: ${style.constAttr * 4}px;
+    border: ${style.constAttr}px solid ${style.grayBackground};
+    border-radius: ${style.constAttr * 2.5}px;
+    background: ${style.black};
     align-items: center;
     justify-content: center;
     h2{
-        font-size: 1.5rem
+        color: ${style.white};
+        font-size: ${props => props.fontSize || '1.5rem'}
     }
 `;
 
@@ -47,7 +49,7 @@ const HeaderWrapper = ({ menus, networks }: HeaderProps) => {
                         <MeunComponent {...{ menus }} />
                     </HeaderComponent>
                     <HeaderComponent justifyContent={'center'}>
-                        <Logo>
+                        <Logo fontSize='1.8rem'>
                             <h2>&#60;REO/&#62;</h2>
                         </Logo>
                     </HeaderComponent>

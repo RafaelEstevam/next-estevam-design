@@ -7,19 +7,20 @@ const ItemMenu = styled('li')`
 `
 
 const ItemLink = styled('a')`
-    color: #fff;
+    color: ${style.white};
     border-radius: ${style.constAttr * 2.5}px;
     padding: ${style.constAttr * 4}px;
-    transition: 0.1s linear all;
     background: ${style.grayBackground};
+    transition: 0.1s linear all;
+    opacity: 0.8;
     :hover{
-        background: ${style.grayBackground};
+        opacity: 1;
     }
 `
 
 const Menu = styled('ul')`
     display: flex;
-    gap: 16px
+    gap: ${style.constAttr * 4}px
 `
 
 const MeunComponent = ({ networks }: MenuProps) => {

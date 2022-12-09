@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { style } from '../../styles/settings';
 
 export interface ContentItems {
     id: string,
@@ -16,18 +17,27 @@ export const ContentWrapper = styled('div')`
 `
 
 export const ContentItem = styled('div')`
-    margin-bottom: 64px;
+    margin-bottom: ${style.constAttr *16}px;
     justify-content: flex-end;
     display: flex;
     flex-direction: column;
     align-items: end;
+    color: ${style.white};
     h2{
         font-size: 2.5rem;
-        margin-bottom: 16px;
+        margin-bottom: ${style.constAttr * 4}px;
     }
     p{
         text-align: right;
+        color: ${style.textLight};
     }
+`;
+
+const ContentItemWrapper = styled('div')`
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 `
 
 const ContentComponent = ({ contents }: ContentProps) => {
@@ -35,8 +45,10 @@ const ContentComponent = ({ contents }: ContentProps) => {
         <ContentWrapper>
             {contents?.map((item, key) => (
                 <ContentItem key={key}>
-                    <h2>{item.title}</h2>
-                    <p>{item.text}</p>
+                    <ContentItemWrapper>
+                        <h2>{item.title}</h2>
+                        <p>{item.text}</p>
+                    </ContentItemWrapper>
                 </ContentItem>
             ))}
         </ContentWrapper>

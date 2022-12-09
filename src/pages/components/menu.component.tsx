@@ -56,12 +56,10 @@ const ItemLink = styled('a')`
     cursor: default;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: ${style.fontSize}rem;
     padding: ${style.constAttr * 4}px ${style.constAttr * 2}px;
-    // display: block;
     min-width: max-content;
     display: none;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     &.active{
         display: block;
         :hover{
@@ -78,11 +76,11 @@ const ItemLink = styled('a')`
         top: 0px;
         background: #ffffff03;
         backdrop-filter: invert(100);
-        transition: 0.2s linear all;
+        transition: 0.1s linear all;
     }
     :hover{
         ::after{
-            width: 50%;
+            width: 5%;
         }
     }
 `;
@@ -92,6 +90,7 @@ const HamburgerMenu = styled('div')`
     position: relative;
     height: ${style.constAttr * 10}px;
     width: ${style.constAttr * 12}px;
+    background: transparent;
     .ham{
         width: 100%;
         height: ${style.constAttr}px;
@@ -135,7 +134,6 @@ const HamburgerMenu = styled('div')`
 
 const HamburgerMenuWrapper = styled('div')<{ show?: Boolean }>`
     display: flex;
-    // align-items: center;
     gap: ${style.constAttr * 10}px;
     flex-direction: column;
     position: fixed;
@@ -144,8 +142,8 @@ const HamburgerMenuWrapper = styled('div')<{ show?: Boolean }>`
 
 const MenuBackground = styled('div')<{ bgColor?: string, efect?: string, top?: number }>`
   width: 0px;
-  height: 100%;
-  position: absolute;
+  height: 200%;
+  position: fixed;
   background: ${props => props.bgColor};
   z-index: 2;
   left: 0px;
@@ -170,15 +168,6 @@ const MeunComponent = ({ menus }: MenuProps) => {
                     <div className="ham ham2 ham2-2"></div>
                     <div className="ham ham3"></div>
                 </HamburgerMenu>
-                {/* {show && (
-                    <Menu className={show && 'active'}>
-                        {menus?.map((item, key) => (
-                            <ItemMenu key={key}>
-                                <ItemLink className={show && 'active'} href={item.link}>{item.label}</ItemLink>
-                            </ItemMenu>
-                        ))}
-                    </Menu>
-                )} */}
             </HamburgerMenuWrapper>
             
             <Menu className={show && 'active'}>
@@ -189,8 +178,8 @@ const MeunComponent = ({ menus }: MenuProps) => {
                 ))}
             </Menu>
 
-            <MenuBackground bgColor='rgba(240,240,240,0.1)' efect='invert(100)' className={show && 'active'}/>
-            <MenuBackground bgColor='rgba(237,237,237,1)' top={134} className={show && 'active'}/>
+            <MenuBackground bgColor='rgba(240,240,240,1)' efect='invert(100)' className={show && 'active'}/> 
+            {/* <MenuBackground bgColor='rgba(237,237,237,1)' top={134} className={show && 'active'}/> */}
         </>
     )
 };

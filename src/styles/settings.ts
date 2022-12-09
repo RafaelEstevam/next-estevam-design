@@ -5,6 +5,7 @@ const style = {
   fontSize: 1,
   black: '#121212',
   white: "#ffffff",
+  textLight: '#888888',
   grayBackground: '#333333',
   purple: '#5500ff'
 }
