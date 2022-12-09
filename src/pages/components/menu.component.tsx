@@ -37,37 +37,53 @@ const ItemMenu = styled('li')`
     }
 `
 
+const Menu = styled('ul')`
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: ${style.constAttr * 8}px;
+    opacity: 0;
+    transition: 0.1s linear all;
+    top: 140px;
+    z-index: 20;
+    &.active{
+        opacity: 1;
+    }
+`;
+
 const ItemLink = styled('a')`
-    color: #fff;
+    color: ${style.black};
     cursor: default;
     text-transform: uppercase;
     font-weight: bold;
     font-size: ${style.fontSize}rem;
     padding: ${style.constAttr * 4}px ${style.constAttr * 2}px;
-    display: block;
+    // display: block;
     min-width: max-content;
+    display: none;
+    font-size: 3.5rem;
     &.active{
+        display: block;
         :hover{
             cursor: pointer;
         }
     }
-    
-`
-
-const ItemLinkEffect = styled('div')`
-    width: 100%;
-    height: ${style.constAttr}px;
-    background: ${style.grayBackground};
-    border-radius: ${style.constAttr * 10}px;
-`
-
-const Menu = styled('ul')`
-    display: flex;
-    gap: ${style.constAttr * 4}px;
-    opacity: 0;
-    transition: 0.1s linear all;
-    &.active{
-        opacity: 1;
+    ::after{
+        content: ' ';
+        background: #fc0;
+        height: 100%;
+        width: 0%;
+        display: block;
+        position: absolute;
+        top: 0px;
+        background: #ffffff03;
+        backdrop-filter: invert(100);
+        transition: 0.2s linear all;
+    }
+    :hover{
+        ::after{
+            width: 50%;
+        }
     }
 `;
 
@@ -88,7 +104,6 @@ const HamburgerMenu = styled('div')`
     }
     .ham1{
         top: 0%;
-        background: ##fc0;
     }
     .ham2{
         top: calc(50% - 2px);
@@ -97,6 +112,9 @@ const HamburgerMenu = styled('div')`
         bottom: 0px;
     }
     &.active{
+        .ham{
+            background: ${style.black};
+        }
         .ham1{
             opacity:0;
             top: calc(50% - 4px);
@@ -115,10 +133,28 @@ const HamburgerMenu = styled('div')`
     }
 `
 
-const HamburgerMenuWrapper = styled('div')`
+const HamburgerMenuWrapper = styled('div')<{ show?: Boolean }>`
     display: flex;
-    align-items: center;
+    // align-items: center;
     gap: ${style.constAttr * 10}px;
+    flex-direction: column;
+    position: fixed;
+    z-index: ${props => props.show ? 10 : 2};
+`
+
+const MenuBackground = styled('div')<{ bgColor?: string, efect?: string, top?: number }>`
+  width: 0px;
+  height: 100%;
+  position: absolute;
+  background: ${props => props.bgColor};
+  z-index: 2;
+  left: 0px;
+  backdrop-filter: ${props => props.efect};
+  top: ${props => props.top}px;
+  transition: 0.1s linear all;
+  &.active{
+    width: calc(50%);
+  }
 `
 
 const MeunComponent = ({ menus }: MenuProps) => {
@@ -126,23 +162,36 @@ const MeunComponent = ({ menus }: MenuProps) => {
     const [show, setShow] = useState<Boolean>(false);
 
     return (
-        <HamburgerMenuWrapper>
-            <HamburgerMenu className={show && 'active'} onClick={() => show ? setShow(false) : setShow(true)}>
-                <div className="ham ham1"></div>
-                <div className="ham ham2"></div>
-                <div className="ham ham2 ham2-2"></div>
-                <div className="ham ham3"></div>
-            </HamburgerMenu>
+        <>
+            <HamburgerMenuWrapper {...{show}}>
+                <HamburgerMenu className={show && 'active'} onClick={() => show ? setShow(false) : setShow(true)}>
+                    <div className="ham ham1"></div>
+                    <div className="ham ham2"></div>
+                    <div className="ham ham2 ham2-2"></div>
+                    <div className="ham ham3"></div>
+                </HamburgerMenu>
+                {/* {show && (
+                    <Menu className={show && 'active'}>
+                        {menus?.map((item, key) => (
+                            <ItemMenu key={key}>
+                                <ItemLink className={show && 'active'} href={item.link}>{item.label}</ItemLink>
+                            </ItemMenu>
+                        ))}
+                    </Menu>
+                )} */}
+            </HamburgerMenuWrapper>
+            
             <Menu className={show && 'active'}>
                 {menus?.map((item, key) => (
                     <ItemMenu key={key}>
                         <ItemLink className={show && 'active'} href={item.link}>{item.label}</ItemLink>
-                        <ItemLinkEffect className="itemLinkEffect" />
                     </ItemMenu>
                 ))}
             </Menu>
 
-        </HamburgerMenuWrapper>
+            <MenuBackground bgColor='rgba(240,240,240,0.1)' efect='invert(100)' className={show && 'active'}/>
+            <MenuBackground bgColor='rgba(237,237,237,1)' top={134} className={show && 'active'}/>
+        </>
     )
 };
 

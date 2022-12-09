@@ -17,6 +17,16 @@ import ButtonComponent from '../components/Button.component';
 const Main = styled('main')`
   position: relative;
   z-index: 2;
+`;
+
+const MenuBackground = styled('div')<{ bgColor?: string, efect?: string, top?: number }>`
+  width: calc(50%);
+  height: 100%;
+  position: absolute;
+  background: ${props => props.bgColor};
+  z-index: 40;
+  backdrop-filter: ${props => props.efect};
+  top: ${props => props.top}px;
 `
 
 const LandingPageTemplate = (props: ContentProps) => {
@@ -27,8 +37,11 @@ const LandingPageTemplate = (props: ContentProps) => {
     <div style={{ position: 'relative' }}>
       <Border />
 
+      
+      
       <Main>
-
+        {/* <MenuBackground bgColor='rgba(255,255,255,0.1)' efect='invert(100)'/>
+        <MenuBackground bgColor='rgba(240,240,240,1)' top={134}/> */}
         <HeaderWrapper {...{ menus, networks }} />
 
         <Wrapper content>
