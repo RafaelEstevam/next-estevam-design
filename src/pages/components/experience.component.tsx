@@ -1,36 +1,35 @@
 import styled from 'styled-components';
 import { GraduationExperiencesItems } from '../../interfaces/graduationExperience.interface';
-import { ContentItem } from './content.component';
+import { ContentWrapper, ContentItem, ContentTitle, Content, ContentItemWrapper } from './content.component';
+
 
 export type ExperienceProps = {
     experiences?: GraduationExperiencesItems[];
 }
 
-const ExperienceItem = styled(ContentItem)`
+
+export const ExperienceWrapper = styled('div')`
+    width: 50%;
     justify-content: flex-start;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    h2{
-        font-size: 2.5rem;
-        margin-bottom: 16px;
-    }
-    p{
-        text-align: left;
-    }
+`
+
+const ExperienceContent = styled(Content)`
+    text-align: left;
 `
 
 const ExperienceComponent = ({ experiences }: ExperienceProps) => {
     return (
-        <div style={{ width: '50%' }}>
+        <ExperienceWrapper>
             {experiences?.map((item, key) => (
-                <ExperienceItem key={key}>
-                    <h2>{item.name}</h2>
-                    <p>{item.description}</p>
-                    <p>{item.startDate} - {item.endDate}</p>
-                </ExperienceItem>
+                <ContentItem key={key} justifyContent='flex-end' align='start'>
+                    <ContentTitle>{item.name}</ContentTitle>
+                    <ExperienceContent>{item.description}</ExperienceContent>
+                    <ExperienceContent>{item.startDate} - {item.endDate}</ExperienceContent>
+                </ContentItem>
             ))}
-        </div>
+        </ExperienceWrapper>
     )
 };
 

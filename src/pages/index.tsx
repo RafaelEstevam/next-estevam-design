@@ -1,18 +1,22 @@
 import { GetStaticProps } from "next";
+import { createContext, useContext } from 'react';
 import { GetApi } from '../services/api';
 import LandingPageTemplate, { ContentProps } from './templates/landingPage.template';
 import { queryGetPage } from '../queries/getPage';
+import { create } from "domain";
+import ContextComponent from './components/context.component';
+
+export const LanguageContext = createContext(null);
 
 export default function Home(props: ContentProps) {
-  const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos } = props;
   return (
-    <LandingPageTemplate {...{ menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos }} />
+    <ContextComponent props={props} />
   )
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const getGraph = await GetApi(queryGetPage('en'), 'POST');
-  const { menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos } = getGraph
+  const { menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos, words } = getGraph
 
   return {
     props: {
@@ -24,7 +28,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
       technologies: technologies,
       networks: networks,
       badgets: badgets,
-      photos: photos
+      photos: photos,
+      words: words
     }
   }
 }

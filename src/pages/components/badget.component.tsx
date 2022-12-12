@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContentWrapper, ContentItem } from './content.component';
+import { ContentWrapper, ContentItem, ContentTitle, Content, ContentItemWrapper } from './content.component';
 
 export interface BadgetItems {
     id: string,
@@ -11,30 +11,23 @@ export type BadgetProps = {
     badgets?: BadgetItems[];
 }
 
-export const BadgetItem = styled(ContentItem)`
-    justify-content: flex-start;
-    display: flex;
-    flex-direction: column;
+export const BadgetWrapper = styled(ContentWrapper)`
     align-items: start;
-    h2{
-        font-size: 2.5rem;
-        margin-bottom: 16px;
-    }
-    p{
-        text-align: left;
-    }
-`
+    jusfity-content: flex-start;
+`;
 
 const BadgetComponent = ({ badgets }: BadgetProps) => {
     return (
-        <ContentWrapper>
+        <BadgetWrapper>
             {badgets?.map((item, key) => (
-                <BadgetItem key={key}>
-                    <p>{item.title}</p>
-                    <h2>{item.value}</h2>
-                </BadgetItem>
+                <ContentItem key={key} align='start'>
+                    <ContentItemWrapper align='start'>
+                        <Content>{item.title}</Content>
+                        <ContentTitle>{item.value}</ContentTitle>
+                    </ContentItemWrapper>
+                </ContentItem>
             ))}
-        </ContentWrapper>
+        </BadgetWrapper>
     )
 };
 

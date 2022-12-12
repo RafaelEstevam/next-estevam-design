@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useContext } from 'react';
+import { LanguageContext } from '../components/context.component';
 import HeaderWrapper, { Logo } from '../components/header.component';
 import { MenuItems, NetworkItems } from '../components/menu.component';
 import SlideComponent, { SlideItem } from '../components/slide.component';
@@ -13,13 +15,14 @@ import PhotoComponent, { PhotoItem } from '../components/photo.component';
 import Border from '../components/border.component';
 import FormComponent from '../components/form.component';
 import ButtonComponent from '../components/Button.component';
+import TitleComponent from '../components/title.component';
 
 const Main = styled('main')`
   position: relative;
   z-index: 2;
 `;
 
-const MenuBackground = styled('div')<{ bgColor?: string, efect?: string, top?: number }>`
+const MenuBackground = styled('div') <{ bgColor?: string, efect?: string, top?: number }>`
   width: calc(50%);
   height: 100%;
   position: absolute;
@@ -31,14 +34,14 @@ const MenuBackground = styled('div')<{ bgColor?: string, efect?: string, top?: n
 
 const LandingPageTemplate = (props: ContentProps) => {
 
-  const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos } = props;
+  const language = useContext(LanguageContext);
+
+  const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words } = props;
 
   return (
     <div style={{ position: 'relative' }}>
       <Border />
 
-      
-      
       <Main>
         {/* <MenuBackground bgColor='rgba(255,255,255,0.1)' efect='invert(100)'/>
         <MenuBackground bgColor='rgba(240,240,240,1)' top={134}/> */}
@@ -61,11 +64,11 @@ const LandingPageTemplate = (props: ContentProps) => {
         <WrapperDivider borderTop borderBottom margin id="graduation-experience" >
           <Wrapper >
             <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', alignItems: 'center', marginBottom: '64px' }}>
-              <h2 style={{ fontSize: '3.5rem', width: '33%', display: 'flex', justifyContent: 'flex-end' }}>Graduation</h2>
+              <TitleComponent display='flex' justifyContent='flex-end' title={language[0].word} width='33%' fontSize='3.5rem' />
               <Logo>
-                <h2 style={{ fontSize: '3.5rem' }}>&</h2>
+                <TitleComponent title='&' width='33%' fontSize='3.5rem' />
               </Logo>
-              <h2 style={{ fontSize: '3.5rem', width: '33%' }}>Experience</h2>
+              <TitleComponent display='flex' justifyContent='flex-start' title={language[1].word} width='33%' fontSize='3.5rem' />
             </div>
             <div style={{ display: 'flex', gap: '128px' }}>
               <GraduationComponent {...{ graduations }} />
@@ -77,7 +80,7 @@ const LandingPageTemplate = (props: ContentProps) => {
         <WrapperDivider borderBottom>
           <Wrapper>
             <div style={{ display: 'flex', alignItems: 'center', gap: '64px' }}>
-              <h2 style={{ fontSize: '3.5rem' }}>Knowledges</h2>
+              <TitleComponent title={language[2].word} fontSize='3.5rem' />
               <TechnologyComponent {...{ technologies }} />
             </div>
           </Wrapper>
@@ -86,13 +89,13 @@ const LandingPageTemplate = (props: ContentProps) => {
         <Wrapper id="contact">
           <div style={{ padding: '64px 0px', display: 'flex', gap: '128px' }}>
             <div style={{ width: '50%' }}>
-              <h2 style={{ fontSize: '3.5rem' }}>Contacts</h2>
+              <TitleComponent title={language[3].word} fontSize='3.5rem' />
               <FormComponent />
             </div>
             <div style={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                 <Logo>
-                  <h2>&#60;REO/&#62;</h2>
+                  <TitleComponent title='<REO/>' fontSize='2.5rem' />
                 </Logo>
                 <ButtonComponent label='Download CV' />
               </div>
@@ -123,5 +126,6 @@ export type ContentProps = {
   technologies: TechnologyItems[],
   networks: NetworkItems[],
   badgets: BadgetItems[],
-  photos: PhotoItem[]
+  photos: PhotoItem[],
+  words: String[]
 }

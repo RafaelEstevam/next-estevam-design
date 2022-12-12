@@ -1,33 +1,27 @@
 import styled from 'styled-components';
 import { GraduationExperiencesItems } from '../../interfaces/graduationExperience.interface';
-import { ContentItem } from './content.component';
+import { ContentTitle, Content, ContentItem } from './content.component';
+import { ExperienceWrapper } from './experience.component';
 
 export type GraduationProps = {
     graduations?: GraduationExperiencesItems[];
 }
 
-const GraduationItem = styled(ContentItem)`
-    justify-content: flex-end;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    h2{
-        font-size: 2.5rem;
-        margin-bottom: 16px;
-    }
+const GraduationTitle = styled(ContentTitle)`
+    text-align: right;
 `
 
 const GraduationComponent = ({ graduations }: GraduationProps) => {
     return (
-        <div style={{ width: '50%' }}>
+        <ExperienceWrapper>
             {graduations?.map((item, key) => (
-                <GraduationItem key={key}>
-                    <h2>{item.name}</h2>
-                    <p>{item.description}</p>
-                    <p>{item.startDate} - {item.endDate}</p>
-                </GraduationItem>
+                <ContentItem key={key}>
+                    <GraduationTitle>{item.name}</GraduationTitle>
+                    <Content>{item.description}</Content>
+                    <Content>{item.startDate} - {item.endDate}</Content>
+                </ContentItem>
             ))}
-        </div>
+        </ExperienceWrapper>
     )
 };
 

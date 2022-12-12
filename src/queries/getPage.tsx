@@ -12,6 +12,9 @@ const queryGetPage = (language?: string | string[] | undefined) => {
         title
         text
         typeOfContent
+        content{
+					html
+        }
       }
       slides(locales:${language}){
         id
@@ -65,6 +68,9 @@ const queryGetPage = (language?: string | string[] | undefined) => {
         id
         url
         mimeType
+      },
+      words(locales:${language}){
+        word
       }
     }
   `
