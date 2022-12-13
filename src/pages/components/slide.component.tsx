@@ -52,9 +52,9 @@ const SlideComponent = ({ items }: SlideProps) => {
             <SlideWrapper>
                 {items?.map((item, key) => (
                     <SlideContent key={key}>
-                        <Subtitle key={key}>{item.title}</Subtitle>
-                        <Title key={key}>{item.subtitle}</Title>
-                        <Description key={key}>{item.description}</Description>
+                        <Subtitle >{item.title}</Subtitle>
+                        <Title >{item.subtitle}</Title>
+                        <Description >{item.description}</Description>
                     </SlideContent>
                 ))}
             </SlideWrapper>

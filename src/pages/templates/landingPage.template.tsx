@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
-import { LanguageContext } from '../components/context.component';
+// import { LanguageContext } from '../components/context.component';
 import HeaderWrapper, { Logo } from '../components/header.component';
 import { MenuItems, NetworkItems } from '../components/menu.component';
 import SlideComponent, { SlideItem } from '../components/slide.component';
@@ -17,6 +16,10 @@ import FormComponent from '../components/form.component';
 import ButtonComponent from '../components/Button.component';
 import TitleComponent from '../components/title.component';
 
+export interface WordInterface {
+  word: string
+}
+
 const Main = styled('main')`
   position: relative;
   z-index: 2;
@@ -30,11 +33,9 @@ const MenuBackground = styled('div') <{ bgColor?: string, efect?: string, top?: 
   z-index: 40;
   backdrop-filter: ${props => props.efect};
   top: ${props => props.top}px;
-`
+`;
 
 const LandingPageTemplate = (props: ContentProps) => {
-
-  const language = useContext(LanguageContext);
 
   const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words } = props;
 
@@ -43,15 +44,14 @@ const LandingPageTemplate = (props: ContentProps) => {
       <Border />
 
       <Main>
-        {/* <MenuBackground bgColor='rgba(255,255,255,0.1)' efect='invert(100)'/>
-        <MenuBackground bgColor='rgba(240,240,240,1)' top={134}/> */}
+
         <HeaderWrapper {...{ menus, networks }} />
 
-        <Wrapper content>
+        <Wrapper content={'true'}>
           <SlideComponent {...{ items: slides }} />
         </Wrapper>
 
-        <Wrapper content id="about">
+        <Wrapper content={'true'} id="about">
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '64px', alignItems: 'center' }}>
             <ContentComponent {...{ contents }} />
             <PhotoComponent {...{ photos }} />
@@ -64,11 +64,11 @@ const LandingPageTemplate = (props: ContentProps) => {
         <WrapperDivider borderTop borderBottom margin id="graduation-experience" >
           <Wrapper >
             <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', alignItems: 'center', marginBottom: '64px' }}>
-              <TitleComponent display='flex' justifyContent='flex-end' title={language[0].word} width='33%' fontSize='3.5rem' />
+              <TitleComponent display='flex' justifyContent='flex-end' title={'language[0]?.word'} width='33%' fontSize='3.5rem' />
               <Logo>
                 <TitleComponent title='&' width='33%' fontSize='3.5rem' />
               </Logo>
-              <TitleComponent display='flex' justifyContent='flex-start' title={language[1].word} width='33%' fontSize='3.5rem' />
+              <TitleComponent display='flex' justifyContent='flex-start' title={'language[1]?.word'} width='33%' fontSize='3.5rem' />
             </div>
             <div style={{ display: 'flex', gap: '128px' }}>
               <GraduationComponent {...{ graduations }} />
@@ -80,7 +80,7 @@ const LandingPageTemplate = (props: ContentProps) => {
         <WrapperDivider borderBottom>
           <Wrapper>
             <div style={{ display: 'flex', alignItems: 'center', gap: '64px' }}>
-              <TitleComponent title={language[2].word} fontSize='3.5rem' />
+              <TitleComponent title={'language[2]?.word'} fontSize='3.5rem' />
               <TechnologyComponent {...{ technologies }} />
             </div>
           </Wrapper>
@@ -89,7 +89,7 @@ const LandingPageTemplate = (props: ContentProps) => {
         <Wrapper id="contact">
           <div style={{ padding: '64px 0px', display: 'flex', gap: '128px' }}>
             <div style={{ width: '50%' }}>
-              <TitleComponent title={language[3].word} fontSize='3.5rem' />
+              <TitleComponent title={'language[3]?.word'} fontSize='3.5rem' />
               <FormComponent />
             </div>
             <div style={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -117,6 +117,10 @@ const LandingPageTemplate = (props: ContentProps) => {
 
 export default LandingPageTemplate;
 
+interface WordItem {
+  word: string
+}
+
 export type ContentProps = {
   menus: MenuItems[],
   contents: ContentItems[],
@@ -127,5 +131,5 @@ export type ContentProps = {
   networks: NetworkItems[],
   badgets: BadgetItems[],
   photos: PhotoItem[],
-  words: String[]
+  words: WordItem[]
 }

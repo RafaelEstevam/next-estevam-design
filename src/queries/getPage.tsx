@@ -69,7 +69,7 @@ const queryGetPage = (language?: string | string[] | undefined) => {
         url
         mimeType
       },
-      words(locales:${language}){
+      words{
         word
       }
     }

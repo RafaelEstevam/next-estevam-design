@@ -5,8 +5,8 @@ import { PostApi } from '../../services/api';
 import InputItem, { TextAreaForm } from './input.form.component';
 import ButtonComponent from './Button.component';
 import { useSnackbar } from 'notistack';
-import { LanguageContext } from './context.component';
-
+// import { LanguageContext } from './context.component';
+import { WordInterface } from '../templates/landingPage.template';
 interface FormInterface {
     name: string,
     email: string,
@@ -24,7 +24,6 @@ const FormWrapper = styled('form')`
 const FormComponent = () => {
 
     const { enqueueSnackbar } = useSnackbar();
-    const language = useContext(LanguageContext);
 
     const [form, setForm] = useState<FormInterface>({
         name: '',
@@ -71,12 +70,12 @@ const FormComponent = () => {
 
     return (
         <FormWrapper onSubmit={(e) => handleSubmit(e)}>
-            <InputItem placeholder={language[4].word} required name={language[4].word} value={form.name || ''} onChange={(e) => handleChange(e)} />
-            <InputItem placeholder={language[5].word} required name={language[5].word} value={form.email || ''} onChange={(e) => handleChange(e)} />
-            <InputItem placeholder={language[6].word} required name={language[6].word} value={form.subject || ''} onChange={(e) => handleChange(e)} />
-            <TextAreaForm placeholder={language[7].word} required rows={5} name={language[7].word} value={form.message || ''} onChange={(e) => handleChange(e)}></TextAreaForm>
+            <InputItem placeholder={'language[4]?.word'} required name={'language[4]?.word'} value={form.name || ''} onChange={(e) => handleChange(e)} />
+            <InputItem placeholder={'language[5]?.word'} required name={'language[5]?.word'} value={form.email || ''} onChange={(e) => handleChange(e)} />
+            <InputItem placeholder={'language[6]?.word'} required name={'language[6]?.word'} value={form.subject || ''} onChange={(e) => handleChange(e)} />
+            <TextAreaForm placeholder={'language[7]?.word'} required rows={5} name={'language[7]?.word'} value={form.message || ''} onChange={(e) => handleChange(e)}></TextAreaForm>
             {!loading ? (
-                <ButtonComponent type='submit' label={language[8].word} />
+                <ButtonComponent type='submit' label={'language[8].word'} />
             ) : (
                 <p>Loading...</p>
             )}

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CustomWrapper = styled('div') <{ content?: boolean }>`
+const CustomWrapper = styled('div') <{ content?: string }>`
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
@@ -23,7 +23,7 @@ const CustomWrapperDivider = styled('div') <{ borderTop?: boolean, margin?: bool
 
 interface WrapperChildren {
     children: React.ReactNode,
-    content?: boolean,
+    content?: string,
     borderTop?: boolean,
     borderBottom?: boolean,
     margin?: boolean,
@@ -38,7 +38,7 @@ export const WrapperDivider = ({ children, content, borderTop, margin, borderBot
 
 const Wrapper = ({ children, content, id }: WrapperChildren) => {
     return (
-        <CustomWrapper content={content} id={id}>{children}</CustomWrapper>
+        <CustomWrapper content={content?.toString()} id={id}>{children}</CustomWrapper>
     )
 }
 
