@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
+import { style } from '../../styles/settings';
+
 
 interface LogoItem {
     url: string
@@ -19,18 +21,19 @@ export type TechnologyProps = {
 }
 
 const TechnologyItem = styled('div')`
-    border: 4px solid #333;
+    border: ${style.constAttr}px solid ${style.grayBackground};
     padding: 16px;
-    border-radius: 10px;
+    border-radius: ${style.constAttr * 2.5}px;
     p{
         font-weight: bold;
         text-transform: uppercase;
+        color: ${style.white};
     }
 `;
 
 const TechnologyWrapper = styled('div')`
     display: flex;
-    gap: 16px;
+    gap: ${style.constAttr * 4}px;
     flex-wrap: wrap;
 `
 

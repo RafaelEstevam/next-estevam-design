@@ -178,7 +178,7 @@ const MeunComponent = ({ menus }: MenuProps) => {
                 ))}
             </Menu>
 
-            <MenuBackground bgColor='rgba(240,240,240,1)' efect='invert(100)' className={show && 'active'}/> 
+            <MenuBackground bgColor={style.white} efect='invert(100)' className={show && 'active'}/> 
             {/* <MenuBackground bgColor='rgba(237,237,237,1)' top={134} className={show && 'active'}/> */}
         </>
     )

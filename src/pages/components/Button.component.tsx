@@ -1,13 +1,14 @@
 
 import styled from "styled-components";
+import { style } from '../../styles/settings';
 
 const ButtonWrapper = styled('button')`
   width: 100%;
-  background: #fff;
-  padding: 16px;
-  border-radius: 10px;
+  background: ${style.white};
+  padding: ${style.constAttr * 4}px;
+  border-radius: ${style.constAttr * 2.5}px;
   border: 0px;
-  color: #121212;
+  color: ${style.black};
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.2rem;

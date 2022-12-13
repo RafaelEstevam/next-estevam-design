@@ -1,19 +1,20 @@
 import styled from 'styled-components';
+import { style } from '../../styles/settings';
 
 const InputItem = styled('input')`
-  min-height: 64px;
-  border-radius: 10px;
-  border: 4px solid #333;
-  background: #333;
-  padding: 16px;
+  min-height: ${style.constAttr * 16}px;
+  border-radius: ${style.constAttr * 2.5}px;
+  border: ${style.constAttr}px solid ${style.black};
+  background: ${style.white};
+  padding: ${style.constAttr * 4}px;
 `;
 
 const TextAreaItem = styled('textarea')`
-  min-height: 64px;
-  border-radius: 10px;
-  border: 4px solid #333;
-  background: #333;
-  padding: 16px;
+  min-height: ${style.constAttr * 16}px;
+  border-radius: ${style.constAttr * 2.5}px;
+  border: ${style.constAttr}px solid ${style.black};
+  background: ${style.white};
+  padding: ${style.constAttr * 4}px;
 `
 
 interface InputProps {

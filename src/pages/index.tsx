@@ -11,13 +11,13 @@ export default function Home(props: ContentProps) {
   const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words } = props;
 
   return (
-    <LandingPageTemplate {...{ menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words }} />
+    <LandingPageTemplate {...{ menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words, lang:"en" }} />
   )
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const getGraph = await GetApi(queryGetPage('en'), 'POST');
-  const { menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos } = getGraph
+  const { menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos, words } = getGraph
 
   return {
     props: {
@@ -30,6 +30,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       networks: networks,
       badgets: badgets,
       photos: photos,
+      words: words
     }
   }
 }

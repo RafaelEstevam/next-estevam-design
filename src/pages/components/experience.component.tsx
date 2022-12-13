@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import { GraduationExperiencesItems } from '../../interfaces/graduationExperience.interface';
-import { ContentWrapper, ContentItem, ContentTitle, Content, ContentItemWrapper } from './content.component';
-
+import { ContentItem, ContentTitle, Content } from './content.component';
 
 export type ExperienceProps = {
     experiences?: GraduationExperiencesItems[];
 }
-
 
 export const ExperienceWrapper = styled('div')`
     width: 50%;

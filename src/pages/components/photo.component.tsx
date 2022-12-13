@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
+import { style } from '../../styles/settings';
+
 export interface PhotoItem {
     id: string
     url: string
@@ -22,11 +24,11 @@ const Photo = styled(Image)`
 `;
 
 const PhotoItem = styled('div')`
-    padding: 48px;
-    border: 4px solid #333;
+    padding: ${style.constAttr * 12}px;
+    border: ${style.constAttr}px solid ${style.grayBackground};
     width: 100%;
     border-radius: 2000px;
-    background: #121212;
+    background: ${style.black};
 `
 
 const PhotoComponent = ({ photos }: PhotoType) => {

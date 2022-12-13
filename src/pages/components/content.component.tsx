@@ -1,8 +1,5 @@
-import { DOMAttributes } from 'react';
 import styled from 'styled-components';
 import { style } from '../../styles/settings';
-
-//DOMAttributes<HTMLDivElement>.dangerouslySetInnerHTML
 
 interface HTMLContent {
     html: string

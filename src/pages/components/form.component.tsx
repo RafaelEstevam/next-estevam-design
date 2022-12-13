@@ -1,12 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import { PostApi } from '../../services/api';
 import InputItem, { TextAreaForm } from './input.form.component';
 import ButtonComponent from './Button.component';
 import { useSnackbar } from 'notistack';
-// import { LanguageContext } from './context.component';
-import { WordInterface } from '../templates/landingPage.template';
+
+import {language} from '../../services/translate';
+import { style } from '../../styles/settings';
+
+import { LangContext } from '../templates/landingPage.template';
+
 interface FormInterface {
     name: string,
     email: string,
@@ -17,13 +20,14 @@ interface FormInterface {
 const FormWrapper = styled('form')`
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    margin-top: 64px;
+    gap: ${style.constAttr * 8}px;
+    margin-top: ${style.constAttr * 16}px;
 `;
 
 const FormComponent = () => {
 
     const { enqueueSnackbar } = useSnackbar();
+    const lang = useContext(LangContext);
 
     const [form, setForm] = useState<FormInterface>({
         name: '',
@@ -70,12 +74,12 @@ const FormComponent = () => {
 
     return (
         <FormWrapper onSubmit={(e) => handleSubmit(e)}>
-            <InputItem placeholder={'language[4]?.word'} required name={'language[4]?.word'} value={form.name || ''} onChange={(e) => handleChange(e)} />
-            <InputItem placeholder={'language[5]?.word'} required name={'language[5]?.word'} value={form.email || ''} onChange={(e) => handleChange(e)} />
-            <InputItem placeholder={'language[6]?.word'} required name={'language[6]?.word'} value={form.subject || ''} onChange={(e) => handleChange(e)} />
-            <TextAreaForm placeholder={'language[7]?.word'} required rows={5} name={'language[7]?.word'} value={form.message || ''} onChange={(e) => handleChange(e)}></TextAreaForm>
+            <InputItem placeholder={language("Name", lang)} required name={'language[4]?.word'} value={form.name || ''} onChange={(e) => handleChange(e)} />
+            <InputItem placeholder={language("Email", lang)} required name={'language[5]?.word'} value={form.email || ''} onChange={(e) => handleChange(e)} />
+            <InputItem placeholder={language("Subject", lang)} required name={'language[6]?.word'} value={form.subject || ''} onChange={(e) => handleChange(e)} />
+            <TextAreaForm placeholder={language("Message", lang)} required rows={5} name={'language[7]?.word'} value={form.message || ''} onChange={(e) => handleChange(e)}></TextAreaForm>
             {!loading ? (
-                <ButtonComponent type='submit' label={'language[8].word'} />
+                <ButtonComponent type='submit' label={language("Submit_contact", lang)} />
             ) : (
                 <p>Loading...</p>
             )}
