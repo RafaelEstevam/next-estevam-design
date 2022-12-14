@@ -83,6 +83,13 @@ const ItemLink = styled('a')`
             width: 5%;
         }
     }
+    @media(max-width: ${style.md}){
+        &.active{
+            display: contents;
+            flex-wrap: wrap;
+            line-break: normal;
+        }
+    }
 `;
 
 const HamburgerMenu = styled('div')`
@@ -152,6 +159,11 @@ const MenuBackground = styled('div')<{ bgColor?: string, efect?: string, top?: n
   transition: 0.1s linear all;
   &.active{
     width: calc(50%);
+  }
+  @media(max-width: ${style.md}){
+    &.active{
+        width: calc(100%);
+    }
   }
 `
 
