@@ -16,7 +16,7 @@ export default function Home(props: ContentProps) {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const getGraph = await GetApi(queryGetPage('en'), 'POST');
+  const getGraph = await GetApi(queryGetPage('pt_BR'), 'POST');
   const { menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos, words } = getGraph
 
   return {

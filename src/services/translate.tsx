@@ -35,6 +35,10 @@ const language = (word: string, lang: string) => {
         "Submit_contact": {
             "en": "Submit contact",
             "pt_BR": "Enviar contato"
+        },
+        "Current": {
+            "en": "Current",
+            "pt_BR": "Atual"
         }
     }
 

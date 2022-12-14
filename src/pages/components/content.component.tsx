@@ -20,13 +20,18 @@ export const ContentWrapper = styled('div')`
     width: 33.33%
 `
 
-export const ContentItem = styled('div') <{ align?: string, justifyContent?: string }>`
+export const ContentItem = styled('div') <{ align?: string, justifyContent?: string, current?: string }>`
     margin-bottom: ${style.constAttr * 16}px;
     justify-content: ${props => props.justifyContent || 'flex-end'};
     display: flex;
     flex-direction: column;
     align-items: ${props => props.align || 'end'};
     color: ${style.white};
+    gap: ${style.constAttr * 4}px;
+    // border: ${style.constAttr}px solid transparent;
+    // padding: ${style.constAttr * 8}px;
+    // border-radius: ${style.constAttr * 2.5}px;
+    // border-color: ${props => props.current === 'true' ? style.grayBackground : 'transparent'}
 `;
 
 export const ContentItemWrapper = styled('div') <{ align?: string }>`
