@@ -44,6 +44,8 @@ const LandingPageTemplate = (props: ContentProps) => {
 
   const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words, lang } = props;
 
+  console.log(lang);
+
   return (
     <LangContext.Provider value={lang}>
       <div style={{ position: 'relative' }}>

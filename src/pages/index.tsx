@@ -15,7 +15,10 @@ export default function Home(props: ContentProps) {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const getGraph = await GetApi(queryGetPage('pt_BR'), 'POST');
+
+  const lang = 'en'
+
+  const getGraph = await GetApi(queryGetPage(lang), 'POST');
   const { menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos, words } = getGraph
 
   return {
@@ -29,7 +32,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
       networks: networks,
       badgets: badgets,
       photos: photos,
-      words: words
+      words: words,
+      lang: lang
     }
   }
 }

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { style } from '../../styles/settings';
 
-
 interface LogoItem {
     url: string
 }
@@ -37,14 +36,21 @@ const TechnologyWrapper = styled('div')`
     flex-wrap: wrap;
 `
 
+export const Tech = ({id, description, logo, name, skill}: TechnologyItems) => {
+    return (
+        <TechnologyItem>
+            <p>{name}</p>
+        </TechnologyItem>
+    )
+}
+
 const TechnologyComponent = ({ technologies }: TechnologyProps) => {
     return (
         <TechnologyWrapper>
-            {technologies?.map((item, key) => (
-                <TechnologyItem key={key}>
-                    <p>{item.name}</p>
-                    {/* <Image alt={item.id} width={100} height={100} key={key} src={item.logo.url} /> */}
-                </TechnologyItem>
+            {technologies?.map((item:TechnologyItems, key) => (
+                <div key={key}>
+                    <Tech {...{name: item.name, id: item.id, description: item.description, logo: item.logo, skill: item.skill}} />
+                </div>
             ))}
         </TechnologyWrapper>
     )
