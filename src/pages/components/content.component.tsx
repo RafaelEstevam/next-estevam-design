@@ -50,11 +50,26 @@ export const ContentTitle = styled('h2') <{ marginBottom?: number }>`
 export const Content = styled('p') <{ align?: string }>`
     text-align: ${props => props.align || 'left'};
     color: ${style.textLight};
+    line-height: ${style.constAttr * 6}px;
 `
+export const ContentLink = styled('a')`
+    color: ${style.purple};
+    :hover{
+        text-decoration: underline;
+    }
+`;
+
 const ContentHtml = styled('div')`
     p{
         text-align: right;
         color: ${style.textLight};
+        line-height: ${style.constAttr * 6}px;
+    }
+    a{
+        color: ${style.purple};
+        :hover{
+            text-decoration: underline;
+        }
     }
 `
 

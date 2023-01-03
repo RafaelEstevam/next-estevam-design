@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { MenuProps } from './menu.component';
 import { style } from '../../styles/settings';
+import { ContentLink } from './content.component';
 
 const ItemMenu = styled('li')`
     list-style: none;
@@ -29,7 +30,7 @@ const MeunComponent = ({ networks }: MenuProps) => {
             <Menu>
                 {networks?.map((item, key) => (
                     <ItemMenu key={key}>
-                        <ItemLink href={item.link}>{item.name}</ItemLink>
+                        <ContentLink href={item.link} target="_blank">{item.name}</ContentLink>
                     </ItemMenu>
                 ))}
             </Menu>

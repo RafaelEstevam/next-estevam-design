@@ -39,6 +39,14 @@ const language = (word: string, lang: string) => {
         "Current": {
             "en": "Current",
             "pt_BR": "Atual"
+        },
+        "Company": {
+            "en": "Company",
+            "pt_BR": "Empresa"
+        },
+        "Institution": {
+            "en": "Institution",
+            "pt_BR": "Instituição"
         }
     }
 

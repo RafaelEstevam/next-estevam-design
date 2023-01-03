@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 // import { LanguageContext } from '../components/context.component';
 import HeaderWrapper, { Logo } from '../components/header.component';
 import { MenuItems, NetworkItems } from '../components/menu.component';
 import SlideComponent, { SlideItem } from '../components/slide.component';
-import ContentComponent, { ContentItems } from '../components/content.component';
+import ContentComponent, { ContentItems, Content } from '../components/content.component';
 import BadgetComponent, { BadgetItems } from '../components/badget.component';
 import TechnologyComponent, { TechnologyItems } from '../components/technology.component';
 import GraduationComponent from '../components/graduation.component';
@@ -59,15 +59,13 @@ const LandingPageTemplate = (props: ContentProps) => {
             <SlideComponent {...{ items: slides }} />
           </Wrapper>
 
-          <Wrapper content={'true'} id="about">
+          <Wrapper style={{height: '100vh'}} content={'true'} id="about">
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '64px', alignItems: 'center' }}>
               <ContentComponent {...{ contents }} />
               <PhotoComponent {...{ photos }} />
               <BadgetComponent {...{ badgets }} />
             </div>
           </Wrapper>
-
-
 
           <WrapperDivider borderTop borderBottom margin id="graduation-experience" >
             <Wrapper >
@@ -113,7 +111,7 @@ const LandingPageTemplate = (props: ContentProps) => {
 
           <WrapperDivider borderTop>
             <Wrapper>
-              Site builded with: React, Next, GraphQL. Hosted on Netlify.
+              <Content>Site builded with: React, Next, GraphQL. Hosted on Netlify.</Content>
             </Wrapper>
           </WrapperDivider>
 

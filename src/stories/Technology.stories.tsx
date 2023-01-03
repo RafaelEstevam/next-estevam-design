@@ -5,6 +5,9 @@ import {Tech} from '../pages/components/technology.component';
 export default {
     title: 'Site/Tech Label',
     component: Tech,
+    argTypes: {
+        backgroundColor: { control: 'color' },
+    },
     
 } as ComponentMeta<typeof Tech>;
 

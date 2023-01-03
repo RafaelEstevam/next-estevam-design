@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { style } from '../../styles/settings';
+import { ContentLink } from './content.component';
 
 export interface NetworkItems {
     id: string,
@@ -37,11 +38,19 @@ const ItemMenu = styled('li')`
     }
 `
 
-const Menu = styled('ul')`
-    position: fixed;
+const MainMenu = styled('ul')`
     display: flex;
     flex-direction: column;
     gap: ${style.constAttr * 8}px;
+`
+
+const Menu = styled('div')`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 140px);
+    padding-bottom: ${style.constAttr * 8}px;
+    position: fixed;
     opacity: 0;
     transition: 0.1s linear all;
     top: 140px;
@@ -52,11 +61,11 @@ const Menu = styled('ul')`
 `;
 
 const ItemLink = styled('a')`
-    color: ${style.black};
+    color: ${style.white};
     cursor: default;
     text-transform: uppercase;
     font-weight: bold;
-    padding: ${style.constAttr * 4}px ${style.constAttr * 2}px;
+    padding: ${style.constAttr * 4}px 0px;
     min-width: max-content;
     display: none;
     font-size: 2.5rem;
@@ -73,6 +82,7 @@ const ItemLink = styled('a')`
         width: 0%;
         display: block;
         position: absolute;
+        border-radius: ${style.constAttr * 2.5}px;
         top: 0px;
         background: #ffffff03;
         backdrop-filter: invert(100);
@@ -119,7 +129,7 @@ const HamburgerMenu = styled('div')`
     }
     &.active{
         .ham{
-            background: ${style.black};
+            background: ${style.white};
         }
         .ham1{
             opacity:0;
@@ -142,23 +152,30 @@ const HamburgerMenu = styled('div')`
 const HamburgerMenuWrapper = styled('div')<{ show?: Boolean }>`
     display: flex;
     gap: ${style.constAttr * 10}px;
-    flex-direction: column;
     position: fixed;
     z-index: ${props => props.show ? 10 : 2};
 `
 
 const MenuBackground = styled('div')<{ bgColor?: string, efect?: string, top?: number }>`
-  width: 0px;
-  height: 200%;
+  
   position: fixed;
-  background: ${props => props.bgColor};
-  z-index: 2;
+  z-index: -1;
   left: 0px;
   backdrop-filter: ${props => props.efect};
-  top: ${props => props.top}px;
-  transition: 0.1s linear all;
+  top: ${props => props.top || 0}px;
+  bottom: 0px;
+  width: calc(100%);
+  transition:.2s linear all;
+  
+  &.fade{
+    opacity: 0;
+    background: transparent;
+    
+  }
   &.active{
-    width: calc(50%);
+    z-index: 2;
+    opacity: 1;
+    background: ${props => props.bgColor};
   }
   @media(max-width: ${style.md}){
     &.active{
@@ -167,31 +184,65 @@ const MenuBackground = styled('div')<{ bgColor?: string, efect?: string, top?: n
   }
 `
 
+const Language = styled('div')`
+  display: flex;
+  gap: ${style.constAttr * 4}px;
+  
+`
+
+const ItemLanguage = styled('a')`
+  color: ${style.textLight};
+`
+
+const setBodyOverlay = (show:boolean) => {
+    const body = document.getElementsByTagName('body')[0];
+    if(show){
+        body.classList.add('hide');
+    }else{
+        body.classList.remove('hide');
+    }
+}
+
 const MeunComponent = ({ menus }: MenuProps) => {
 
     const [show, setShow] = useState<Boolean>(false);
 
+    const handleShow = (show: boolean) => {
+        setShow(show);
+        setBodyOverlay(show);
+    }
+
     return (
         <>
             <HamburgerMenuWrapper {...{show}}>
-                <HamburgerMenu className={show && 'active'} onClick={() => show ? setShow(false) : setShow(true)}>
+                <HamburgerMenu className={show && 'active'} onClick={() => show ? handleShow(false) : handleShow(true)}>
                     <div className="ham ham1"></div>
                     <div className="ham ham2"></div>
                     <div className="ham ham2 ham2-2"></div>
                     <div className="ham ham3"></div>
                 </HamburgerMenu>
+
             </HamburgerMenuWrapper>
+
             
             <Menu className={show && 'active'}>
-                {menus?.map((item, key) => (
-                    <ItemMenu key={key}>
-                        <ItemLink className={show && 'active'} href={item.link}>{item.label}</ItemLink>
-                    </ItemMenu>
-                ))}
+                <MainMenu>
+                    {menus?.map((item, key) => (
+                        <ItemMenu key={key}>
+                            <ItemLink className={show && 'active'} href={item.link}>{item.label}</ItemLink>
+                        </ItemMenu>
+                    ))}
+                </MainMenu>
+
+                <Language className={show && 'active'}>
+                    <ContentLink href="/">en</ContentLink>
+                    <ContentLink href="/pt_BR">pt_BR</ContentLink>
+                </Language>
             </Menu>
 
-            <MenuBackground bgColor={style.white} efect='invert(100)' className={show && 'active'}/> 
-            {/* <MenuBackground bgColor='rgba(237,237,237,1)' top={134} className={show && 'active'}/> */}
+            
+
+            <MenuBackground bgColor={`${style.black}cc`} efect='blur(12px)' className={show ? 'active' : 'fade'}/> 
         </>
     )
 };

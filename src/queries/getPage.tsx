@@ -31,6 +31,7 @@ const queryGetPage = (language?: string | string[] | undefined) => {
         current
         endDate
         typeExperience
+        link
       }
       graduations:graduationExperiences(where:{typeExperience:graduation}, locales:${language}){
         id
@@ -41,6 +42,7 @@ const queryGetPage = (language?: string | string[] | undefined) => {
         current
         endDate
         typeExperience
+        link
       }
       technologies:teches(first:50){
         id

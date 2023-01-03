@@ -40,7 +40,7 @@ export const Logo = styled('div') <{ fontSize?: string }>`
 const HeaderWrapper = ({ menus, networks }: HeaderProps) => {
     return (
         <CustomHeader>
-            <Wrapper id='#'>
+            <Wrapper id='#' header>
                 <MenuWrapper>
                     <HeaderComponent>
                         <MeunComponent {...{ menus }} />

@@ -1,11 +1,13 @@
 import {useContext} from 'react';
 import styled from 'styled-components';
 import { GraduationExperiencesItems } from '../../interfaces/graduationExperience.interface';
-import { ContentItem, ContentTitle, Content } from './content.component';
+import { ContentItem, ContentTitle, Content, ContentLink } from './content.component';
 
 import { language } from '../../services/translate';
 import { LangContext } from '../templates/landingPage.template';
 import { style } from '../../styles/settings';
+
+import {formatDate} from '../../services/time';
 
 export type ExperienceProps = {
     experiences?: GraduationExperiencesItems[];
@@ -41,8 +43,11 @@ const ExperienceComponent = ({ experiences }: ExperienceProps) => {
                 <ContentItem current={item?.current.toString()} key={key} justifyContent='flex-end' align='start'>
                     <ContentTitle>{item.name}</ContentTitle>
                     <ExperienceContent>{item.description}</ExperienceContent>
+                    <ExperienceContent>
+                        {language('Company', lang)}: <ContentLink href={item.link || '/'} target="_blank"><strong>{item.company}</strong></ContentLink>
+                    </ExperienceContent>
                     <ExperienceDate>
-                        <ExperienceContent>{item.startDate}</ExperienceContent>-<ExperienceContent current={item?.current.toString()}>{item?.current ? language('Current', lang) : item.endDate}</ExperienceContent>
+                        <ExperienceContent>{formatDate(item.startDate)}</ExperienceContent>-<ExperienceContent current={item?.current.toString()}>{item?.current ? language('Current', lang) : formatDate(item.endDate)}</ExperienceContent>
                     </ExperienceDate>
                 </ContentItem>
             ))}

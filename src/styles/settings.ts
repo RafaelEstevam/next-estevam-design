@@ -7,7 +7,7 @@ const style = {
   white: "#f0f0f0",
   textLight: '#888888',
   grayBackground: '#333333',
-  purple: '#5500ff',
+  purple: '#a241c9',
   xs: '480px',
   sm: '767px',
   md: '1024px',

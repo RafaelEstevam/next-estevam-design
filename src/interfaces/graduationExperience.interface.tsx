@@ -6,5 +6,6 @@ export interface GraduationExperiencesItems{
     startDate: string,
     current: string,
     endDate: string,
-    typeExperience: string
+    typeExperience: string,
+    link: string
 }

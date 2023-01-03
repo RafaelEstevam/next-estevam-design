@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CustomWrapper = styled('div') <{ content?: string }>`
+const CustomWrapper = styled('div') <{ content?: string, header?: boolean }>`
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
@@ -10,6 +10,11 @@ const CustomWrapper = styled('div') <{ content?: string }>`
     flex-direction: ${props => props.content && 'column'};
     @media(max-width: 1920px){
         padding: 0px 32px;
+        max-width: ${props => !props.header ? '1780px' : '1920px'};
+    }
+    @media(max-width: 1360px){
+        padding: 0px 32px;
+        max-width: ${props => !props.header && '1150px'};
     }
 `;
 
@@ -27,7 +32,9 @@ interface WrapperChildren {
     borderTop?: boolean,
     borderBottom?: boolean,
     margin?: boolean,
-    id?: string
+    id?: string,
+    header?: boolean;
+    style?: any
 }
 
 export const WrapperDivider = ({ children, content, borderTop, margin, borderBottom, id }: WrapperChildren) => {
@@ -36,9 +43,9 @@ export const WrapperDivider = ({ children, content, borderTop, margin, borderBot
     )
 }
 
-const Wrapper = ({ children, content, id }: WrapperChildren) => {
+const Wrapper = ({ children, content, id, header, style }: WrapperChildren) => {
     return (
-        <CustomWrapper content={content?.toString()} id={id}>{children}</CustomWrapper>
+        <CustomWrapper content={content?.toString()} style={style} header={header} id={id}>{children}</CustomWrapper>
     )
 }
 
