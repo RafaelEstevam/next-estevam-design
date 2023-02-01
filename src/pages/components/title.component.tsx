@@ -15,7 +15,7 @@ const Title = styled('h2') <TitleInterface>`
   font-size: ${props => props.fontSize || '3.5rem'};
   display: ${props => props.display || 'inherit'};
   justify-content: ${props => props.justifyContent || 'inherit'};
-`
+`;
 
 const TitleComponent = ({ title, display, fontSize, justifyContent, width }: TitleInterface) => {
   return (

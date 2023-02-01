@@ -8,11 +8,11 @@ interface Language {
 }
 
 export default function Home(props: ContentProps) {
-  const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words, lang } = props;
+  const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words, lang, cvs } = props;
   const isVoid = props && Object.keys(props).length === 0;
 
   return !isVoid ? (
-    <LandingPageTemplate {...{ menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words, lang }}/>
+    <LandingPageTemplate {...{ menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words, lang, cvs }}/>
   ) : (
     <h1>404</h1>
   )
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps = async ({ params = {} }) => {
   const getGraph = await GetApi(queryGetPage(params.language), 'POST');
 
   if (getGraph) {
-    const { menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos, words } = getGraph
+    const { menus, contents, slides, experiences, graduations, technologies, networks, badgets, photos, words, cvs } = getGraph
 
     return {
       props: {
@@ -51,7 +51,8 @@ export const getStaticProps: GetStaticProps = async ({ params = {} }) => {
         badgets: badgets,
         photos: photos,
         words: words,
-        lang: params.language
+        lang: params.language,
+        cvs: cvs
       }
     }
   } else {

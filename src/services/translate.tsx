@@ -1,4 +1,4 @@
-const language = (word: string, lang: string) => {
+const language = (word: string, lang: any) => {
     const languages:any = {
         "Graduation": {
             "en":"Graduation",

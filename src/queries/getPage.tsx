@@ -73,6 +73,9 @@ const queryGetPage = (language?: string | string[] | undefined) => {
       },
       words{
         word
+      },
+      cvs:assets(locales:${language}, where: {mimeType:"application/pdf"}){
+        url
       }
     }
   `

@@ -4,9 +4,9 @@ import { GraduationExperiencesItems } from '../../interfaces/graduationExperienc
 import { ContentTitle, Content, ContentItem, ContentLink } from './content.component';
 import { ExperienceWrapper } from './experience.component';
 import { language } from '../../services/translate';
-import { LangContext } from '../templates/landingPage.template';
 
 import {formatDate} from '../../services/time';
+import { PageContext } from '../templates/landingPage.template';
 
 export type GraduationProps = {
     graduations?: GraduationExperiencesItems[];
@@ -18,7 +18,7 @@ const GraduationTitle = styled(ContentTitle)`
 
 const GraduationComponent = ({ graduations }: GraduationProps) => {
 
-    const lang = useContext(LangContext);
+    const page = useContext(PageContext);
 
     return (
         <ExperienceWrapper>
@@ -27,7 +27,7 @@ const GraduationComponent = ({ graduations }: GraduationProps) => {
                     <GraduationTitle>{item.name}</GraduationTitle>
                     <Content align='right'>{item.description}</Content>
                     <Content align='right'>
-                        {language('Institution', lang)}: <ContentLink href={item.link} target="_blank"><strong>{item.company}</strong></ContentLink>
+                        {language('Institution', page?.lang)}: <ContentLink href={item.link} target="_blank"><strong>{item.company}</strong></ContentLink>
                     </Content>
                     <Content>{formatDate(item.startDate)} - {formatDate(item.endDate)}</Content>
                 </ContentItem>

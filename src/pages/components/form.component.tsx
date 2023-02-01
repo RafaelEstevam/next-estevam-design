@@ -8,7 +8,7 @@ import { useSnackbar } from 'notistack';
 import {language} from '../../services/translate';
 import { style } from '../../styles/settings';
 
-import { LangContext } from '../templates/landingPage.template';
+import { PageContext } from '../templates/landingPage.template';
 
 interface FormInterface {
     name: string,
@@ -27,7 +27,7 @@ const FormWrapper = styled('form')`
 const FormComponent = () => {
 
     const { enqueueSnackbar } = useSnackbar();
-    const lang = useContext(LangContext);
+    const page = useContext(PageContext);
 
     const [form, setForm] = useState<FormInterface>({
         name: '',
@@ -81,18 +81,18 @@ const FormComponent = () => {
         const response = await PostApi(mutation, 'POST', handleError, handleSuccess, handleLoading);
     }
 
-    useEffect(() => {
-        console.log(form)
-    }, [form])
+    // useEffect(() => {
+    //     console.log(form)
+    // }, [form])
 
     return (
         <FormWrapper onSubmit={(e) => handleSubmit(e)}>
-            <InputItem placeholder={language("Name", lang)} required name={'name'} value={form?.name || ''} onChange={(e) => handleChange(e)} />
-            <InputItem placeholder={language("Email", lang)} required name={'email'} value={form?.email || ''} onChange={(e) => handleChange(e)} />
-            <InputItem placeholder={language("Subject", lang)} required name={'subject'} value={form?.subject || ''} onChange={(e) => handleChange(e)} />
-            <TextAreaForm placeholder={language("Message", lang)} required rows={5} name={'message'} value={form?.message || ''} onChange={(e) => handleChange(e)}></TextAreaForm>
+            <InputItem placeholder={language("Name", page?.lang)} required name={'name'} value={form?.name || ''} onChange={(e) => handleChange(e)} />
+            <InputItem placeholder={language("Email", page?.lang)} required name={'email'} value={form?.email || ''} onChange={(e) => handleChange(e)} />
+            <InputItem placeholder={language("Subject", page?.lang)} required name={'subject'} value={form?.subject || ''} onChange={(e) => handleChange(e)} />
+            <TextAreaForm placeholder={language("Message", page?.lang)} required rows={5} name={'message'} value={form?.message || ''} onChange={(e) => handleChange(e)}></TextAreaForm>
             {!loading ? (
-                <ButtonComponent type='submit' label={language("Submit_contact", lang)} />
+                <ButtonComponent type='submit' label={language("Submit_contact", page?.lang)} />
             ) : (
                 <p>Loading...</p>
             )}
