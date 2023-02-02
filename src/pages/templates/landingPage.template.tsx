@@ -116,7 +116,7 @@ const LandingPageTemplate = (props: ContentProps) => {
                     <Logo>
                       <TitleComponent title='<REO/>' fontSize='2.5rem' />
                     </Logo>
-                    {/* <LinkComponent label='Download CV' target="_blank" /> */}
+                    <LinkComponent label='Download CV' target="_blank" />
                   </div>
                 </div>
               </div>
