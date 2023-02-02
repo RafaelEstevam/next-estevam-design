@@ -24,6 +24,15 @@ export interface WordInterface {
   word: string
 }
 
+interface cvsInterface{
+  url: string
+}
+
+interface PageContextType{
+  lang: string,
+  cvs: cvsInterface[]
+}
+
 const Main = styled('main')`
   position: relative;
   z-index: 2;
@@ -38,15 +47,6 @@ const MenuBackground = styled('div') <{ bgColor?: string, efect?: string, top?: 
   backdrop-filter: ${props => props.efect};
   top: ${props => props.top}px;
 `;
-
-interface cvsInterface{
-  url: string
-}
-
-interface PageContextType{
-  lang: string,
-  cvs: cvsInterface[]
-}
 
 export const PageContext = createContext<PageContextType>({lang:"en", cvs:[]});
 

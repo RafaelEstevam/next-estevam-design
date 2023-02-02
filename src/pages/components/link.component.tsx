@@ -1,9 +1,10 @@
+import Link from 'next/link'
 import { useContext } from "react";
 import styled from "styled-components";
 import { style } from '../../styles/settings';
 import { PageContext } from "../templates/landingPage.template";
 
-const LinkWrapper = styled('a')`
+const LinkWrapper = styled(Link)`
   width: 100%;
   background: ${style.white};
   padding: ${style.constAttr * 4}px;
@@ -26,7 +27,7 @@ const LinkComponent = (props: any) => {
     const page = useContext(PageContext);
     const cvUrl = page?.cvs[0];
 
-    return (
+    return cvUrl && (
         <LinkWrapper {...props} href={cvUrl?.url}>
           {props.label}
         </LinkWrapper>
