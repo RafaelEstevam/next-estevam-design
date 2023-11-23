@@ -12,7 +12,7 @@ export default function Home(props: ContentProps) {
   const { menus, contents, slides, graduations, experiences, technologies, networks, badgets, photos, words, cvs } = props;
 
   useEffect(() => {
-    datalayerInitializer('GTM-52BFJFHD');
+    datalayerInitializer('G-VJ2NCYFQZX');
   }, []);
 
   return (
