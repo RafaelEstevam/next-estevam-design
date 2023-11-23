@@ -3,7 +3,7 @@ import { createContext, useEffect } from 'react';
 import { GetApi } from '../services/api';
 import LandingPageTemplate, { ContentProps } from './templates/landingPage.template';
 import { queryGetPage } from '../queries/getPage';
-import {datalayerInitializer} from './utils/datalayerInitializer';
+import {datalayerInitializer} from '../utils/datalayerInitializer';
 
 
 export const LanguageContext = createContext(null);

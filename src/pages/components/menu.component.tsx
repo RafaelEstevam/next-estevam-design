@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { style } from "../../styles/settings";
 import { ContentLink } from "./content.component";
-import { datalayerOnClickMenu } from "../utils/datalayerActions";
+import { datalayerOnClickMenu } from "../../utils/datalayerActions";
 
 export interface NetworkItems {
   id: string;
