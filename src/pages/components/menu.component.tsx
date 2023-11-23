@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { style } from "../../styles/settings";
 import { ContentLink } from "./content.component";
-import { datalayerOnClickMenu } from "../../utils/datalayerActions";
+import { datalayerOnClickMenu, datalayerOnClickMenuItem } from "../../utils/datalayerActions";
 
 export interface NetworkItems {
   id: string;
@@ -231,7 +231,7 @@ const MeunComponent = ({ menus }: MenuProps) => {
       <Menu className={show && "active"}>
         <MainMenu>
           {menus?.map((item, key) => (
-            <ItemMenu key={key}>
+            <ItemMenu key={key} onClick={() => datalayerOnClickMenuItem({link: item.link, label: item.label })}>
               <ItemLink className={show && "active"} href={item.link}>
                 {item.label}
               </ItemLink>

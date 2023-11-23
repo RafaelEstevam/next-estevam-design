@@ -3,3 +3,10 @@ export const datalayerOnClickMenu = () => {
     event: "OnClickMenu"
   });
 }
+
+export const datalayerOnClickMenuItem = (rest) => {
+  window.dataLayer?.push({
+    event: "OnClickItemMenu",
+    ...rest
+  })
+}
